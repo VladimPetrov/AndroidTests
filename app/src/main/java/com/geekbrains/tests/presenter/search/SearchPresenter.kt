@@ -3,6 +3,7 @@ package com.geekbrains.tests.presenter.search
 import com.geekbrains.tests.model.SearchResponse
 import com.geekbrains.tests.repository.GitHubRepository
 import com.geekbrains.tests.repository.GitHubRepository.GitHubRepositoryCallback
+import com.geekbrains.tests.view.ViewContract
 import com.geekbrains.tests.view.search.ViewSearchContract
 import retrofit2.Response
 
@@ -20,8 +21,8 @@ internal class SearchPresenter internal constructor(
 
     var viewContract: ViewSearchContract? = null
 
-    override fun onAttach(viewContract: ViewSearchContract) {
-        this.viewContract = viewContract
+    override fun onAttach(viewContract: ViewContract) {
+        this.viewContract = viewContract as ViewSearchContract
     }
 
     override fun onDetach() {
