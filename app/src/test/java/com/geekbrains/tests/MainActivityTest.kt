@@ -10,7 +10,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.geekbrains.tests.view.details.DetailsActivity
 import com.geekbrains.tests.view.search.MainActivity
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertNotNull
@@ -62,10 +61,20 @@ class MainActivityTest {
     }
 
     @Test
-    fun activityTextView_IsVisible() {
+    fun activityEditView_IsVisible() {
         scenario.onActivity {
             val searchEditTextView = it.findViewById<EditText>(R.id.searchEditText)
             assertEquals(View.VISIBLE, searchEditTextView.visibility)
+        }
+    }
+
+    @Test
+    fun activityEditView_IsText() {
+        scenario.onActivity {
+            val searchEditTextView = it.findViewById<EditText>(R.id.searchEditText)
+            val expectedString = "text"
+            searchEditTextView.setText(expectedString, TextView.BufferType.EDITABLE)
+            assertEquals(expectedString, searchEditTextView.text.toString())
         }
     }
 
@@ -92,6 +101,8 @@ class MainActivityTest {
             assertEquals(View.VISIBLE, detailsActivityButton.visibility)
         }
     }
+
+
 
     @After
     fun close() {
