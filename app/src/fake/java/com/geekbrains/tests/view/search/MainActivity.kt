@@ -77,11 +77,7 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
     }
 
     private fun createRepository(): RepositoryContract {
-        return if (BuildConfig.TYPE == FAKE) {
-            FakeGitHubRepository()
-        } else {
-            GitHubRepository(createRetrofit().create(GitHubApi::class.java))
-        }
+        return FakeGitHubRepository()
     }
 
 
@@ -101,7 +97,8 @@ class MainActivity : AppCompatActivity(), ViewSearchContract {
             text =
                 String.format(
                     Locale.getDefault(), getString(R.string.results_count),
-                    totalCount)
+                    totalCount
+                )
         }
         this.totalCount = totalCount
         adapter.updateResults(searchResults)
