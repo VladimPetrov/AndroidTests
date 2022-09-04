@@ -2,6 +2,7 @@ package com.geekbrains.tests.automator
 
 import android.content.Context
 import android.content.Intent
+import android.view.KeyEvent
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions
@@ -61,11 +62,16 @@ class BehaviorTest {
     fun test_SearchIsPositive() {
         //Через uiDevice находим editText
         val editText = uiDevice.findObject(By.res(packageName, "searchEditText"))
+        val searchButton = uiDevice.findObject(By.res(packageName, "toSearchButton"))
         //Устанавливаем значение
         editText.text = "UiAutomator"
         //Отправляем запрос через Espresso
-        Espresso.onView(ViewMatchers.withId(R.id.searchEditText))
-            .perform(ViewActions.pressImeActionButton())
+        //Espresso.onView(ViewMatchers.withId(R.id.searchEditText))
+        //    .perform(ViewActions.pressImeActionButton())
+
+
+        searchButton.click()
+
 
         //Ожидаем конкретного события: появления текстового поля totalCountTextView.
         //Это будет означать, что сервер вернул ответ с какими-то данными, то есть запрос отработал.
@@ -106,6 +112,8 @@ class BehaviorTest {
         //вам в одном и том же методе нужно отправить запрос на сервер и открыть DetailsScreen.
         Assert.assertEquals(changedText.text, "Number of results: 0")
     }
+
+    
 
     companion object {
         private const val TIMEOUT = 5000L
