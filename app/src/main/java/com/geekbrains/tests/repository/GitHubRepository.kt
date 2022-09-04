@@ -5,9 +5,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-internal class GitHubRepository(private val gitHubApi: GitHubApi) {
+internal class GitHubRepository(private val gitHubApi: GitHubApi): RepositoryContract {
 
-    fun searchGithub(
+   override fun searchGithub(
         query: String,
         callback: GitHubRepositoryCallback
     ) {
@@ -30,8 +30,4 @@ internal class GitHubRepository(private val gitHubApi: GitHubApi) {
         })
     }
 
-    interface GitHubRepositoryCallback {
-        fun handleGitHubResponse(response: Response<SearchResponse?>?)
-        fun handleGitHubError()
-    }
 }
