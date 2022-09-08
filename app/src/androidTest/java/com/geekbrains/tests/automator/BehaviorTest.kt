@@ -1,4 +1,4 @@
-package com.geekbrains.tests.automator
+package com.geekbrains.tests
 
 import android.content.Context
 import android.content.Intent
@@ -14,7 +14,9 @@ import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiObject2
 import androidx.test.uiautomator.Until
 import com.geekbrains.tests.BuildConfig
-import com.geekbrains.tests.R
+import com.geekbrains.tests.TIMEOUT
+import com.geekbrains.tests.TEST_NUMBER_OF_RESULTS_ZERO
+import com.geekbrains.tests.TEST_FAKE_NUMBER_OF_RESULTS
 import com.geekbrains.tests.view.search.MainActivity
 import org.junit.Assert
 import org.junit.Before
@@ -82,7 +84,7 @@ class BehaviorTest {
             )
         //Убеждаемся, что сервер вернул корректный результат. Обратите внимание, что количество
         //результатов может варьироваться во времени, потому что количество репозиториев постоянно меняется.
-        Assert.assertEquals("Number of results: 42", changedText.text.toString())
+        Assert.assertEquals(TEST_FAKE_NUMBER_OF_RESULTS, changedText.text.toString())
     }
 
     //Убеждаемся, что DetailsScreen открывается
@@ -110,7 +112,7 @@ class BehaviorTest {
         //так как мы кликаем по кнопке не отправляя никаких поисковых запросов.
         //Чтобы проверить отображение определенного количества репозиториев,
         //вам в одном и том же методе нужно отправить запрос на сервер и открыть DetailsScreen.
-        Assert.assertEquals(changedText.text, "Number of results: 0")
+        Assert.assertEquals(changedText.text, TEST_NUMBER_OF_RESULTS_ZERO)
     }
 
     @Test
@@ -129,7 +131,7 @@ class BehaviorTest {
                 TIMEOUT
             )
 
-        Assert.assertEquals(changedText.text, "Number of results: 42")
+        Assert.assertEquals(changedText.text, TEST_FAKE_NUMBER_OF_RESULTS)
 
     }
 
@@ -178,7 +180,7 @@ class BehaviorTest {
         Assert.assertEquals(changedText.text, "Number of results: 41")
     }
 
-    companion object {
-        private const val TIMEOUT = 5000L
-    }
+  // companion object {
+  //      private const val TIMEOUT = 5000L
+  //  }
 }
