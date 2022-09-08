@@ -13,6 +13,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.geekbrains.tests.BuildConfig
 import com.geekbrains.tests.R
+import com.geekbrains.tests.TEST_FAKE_NUMBER_OF_RESULTS
 import com.geekbrains.tests.view.search.MainActivity
 import junit.framework.TestCase
 import org.hamcrest.Matcher
@@ -84,7 +85,7 @@ class MainActivityEspressoTest {
         onView(withId(R.id.searchEditText)).perform(replaceText("algol"), closeSoftKeyboard())
         onView(withId(R.id.searchEditText)).perform(pressImeActionButton())
         if (BuildConfig.TYPE == MainActivity.FAKE) {
-            onView(withId(R.id.totalNumberTextView)).check(matches(withText("Number of results: 42")))
+            onView(withId(R.id.totalNumberTextView)).check(matches(withText(TEST_FAKE_NUMBER_OF_RESULTS)))
         } else {
             onView(isRoot()).perform(delay())
             onView(withId(R.id.totalNumberTextView)).check(matches(withText("Number of results: 2283")))
